@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/animate.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+        <title>Stock Portfolio Manager</title>
+	</head>
+	<body style="">
+
+   <div class="container">
+       <div class="row">
+            <div class="col-12">
+                 <div class="calculate-side">
+                        <h1 class='lead-title'>Stock Portfolio Manager</h1>
+                         <!-- Form  -->
+                        <form method="POST" action="report" class='calculate-side-form'>
+                            <p class="h5 text-center mb-4">Enter Details</p>
+
+                            <div class="md-form ">
+                                <i class="fa fa-usd prefix grey-text"></i>
+                                <input type="number" id="amount" name="amount" class="form-control">
+                                <label for="amount">Enter Amount($)</label>
+                            </div>
+
+                            <div class="md-form pos-form">
+                                <i class="fa fa-suitcase prefix grey-text"></i>
+                                <label for="investment_choices_master">Select Investion Options</label>
+
+                               <div class="investment_choices_area clearfix">
+
+                                   <label for="ic_1">
+                                         <img src="{{ url_for('static',filename='images/1.jpg') }}" alt="">
+                                         <span>Ethical Investing</span>
+                                         <input type="checkbox" value="Ethical Investing" id="ic_1" name="investment_choices" class="form-control">
+                                   </label>
+
+                                   <label for="ic_2">
+                                        <img src="{{ url_for('static',filename='images/2.jpg') }}" alt="">
+                                         <span>Growth Investing</span>
+                                         <input type="checkbox" value="Growth Investing" id="ic_2" name="investment_choices" class="form-control">
+                                   </label>
+
+
+                                   <label for="ic_3">
+                                         <img src="{{ url_for('static',filename='images/3.png') }}" alt="">
+                                         <span>Index Investing</span>
+                                         <input type="checkbox" value="Index Investing" id="ic_3" name="investment_choices" class="form-control">
+                                   </label>
+
+                                   <label for="ic_4">
+                                         <img src="{{ url_for('static',filename='images/4.png') }}" alt="">
+                                         <span>Quality Investing</span>
+                                         <input type="checkbox" value="Quality Investing" id="ic_4" name="investment_choices" class="form-control">
+                                   </label>
+																	 <label for="ic_5">
+																				 <img src="{{ url_for('static',filename='images/5.png') }}" alt="">
+																				 <span>Value Investing</span>
+																				 <input type="checkbox" value="Value Investing" id="ic_5" name="investment_choices" class="form-control">
+																	 </label>
+                               </div>
+
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-info">Generate Report</button>
+                            </div>
+                        </form>
+                        <!-- End of Form  -->
+
+                    </div>
+
+            </div>
+
+
+
+       </div>
+   </div>
+
+
+    <!-- Modal for form error checking. -->
+<div class="modal fade" id="formErrorModal" tabindex="-1" role="dialog" aria-labelledby="formErrorModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formErrorModal">We have a problem !</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	 <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+
+
+
+
+  </body>
+</html>

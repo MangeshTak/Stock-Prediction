@@ -1,0 +1,144 @@
+<html>
+	<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+        <title>Stock Portfolio Manager</title>
+
+        <script src="{{ url_for('static',filename='js/Chart.bundle.js') }}"></script>
+	</head>
+	<body style="">
+
+
+    <div class="how-does-it-works">
+
+    </div> <!-- Background Image Stub -->
+
+   <div class="container">
+       <div class="row">
+           <pre>
+
+           </pre>
+                  <div class="page-content">
+                        <h1 class='lead-title'>Report for {{report_data['strategies_header']}}</h1>
+                        <div class="content">
+
+                            <div class="col-12"> <!-- Bootstrap full column -->
+
+                            <h5>Based on your options , we have complied the follow report. Your investment for a period of 10 years will be ${{ report_data['strategy']['projected_amount'] }}</h5>
+
+                           <div class="row">
+                               <div class="col-12">
+
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>Symbol</th>
+                                      <th>Company</th>
+                                      <!--<th>Amount Alotted</th>-->
+                                      <th>Latest Price</th>
+                                      <th>Holding Ratio</th>
+                                      <th>Amount Alloted</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+
+                                    {% for sym in report_data['strategy']['data'].keys() %}
+
+
+                                    <tr>
+                                      <td>{{ sym }}</td>
+                                      <td>{{ report_data['strategy']['data'][sym]['companyName'] }}</td>
+                                      <!--<td>{{ report_data['strategy']['pie_values'][loop.index -1] }}</td>-->
+                                      <td>{{ report_data['strategy']['data'][sym]['latest'] }}</td>
+                                      <td>{{ report_data['strategy']['data'][sym]['ratio'] }} %</td>
+                                      <td>{{ report_data['strategy']['data'][sym]['amount'] }} </td>
+                                    </tr>
+
+                                    {% endfor %}
+
+                                  </tbody>
+                                </table>
+
+                               </div>
+                           </div>
+
+                            <br><br>
+
+                            </div> <!-- end of column -->
+
+                           <div class="row">
+                                <div class="col-12">
+                                    <h3>Past Portfolio Performance</h3><br>
+                                    <canvas id="myChart" width="800" height="400"></canvas>
+                                    <script>{% autoescape false %}
+                                        var ctx = document.getElementById("myChart").getContext('2d');
+                                        var myChart = new Chart(ctx, {
+                                            type: 'line',
+                                            data: {
+                                                labels:{{ report_data['strategy']['history_label'] }},
+                                                datasets: [{
+                                                    label: 'Share per day',
+                                                    data: {{ report_data['strategy']['history_data'] }},
+                                                    borderColor: [
+                                                        'rgba(35,178,92,1)',
+                                                    ],
+                                                    borderWidth: 1
+                                                }]
+                                            },
+                                            options: {
+                                                scales: {
+                                                    yAxes: [{
+                                                        ticks: {
+                                                            beginAtZero:false
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        });
+                                        {% endautoescape %}
+                                    </script>
+                                </div>
+                           </div>
+                           <br><br>
+                        </div>
+                  </div>
+       </div>
+   </div>
+
+
+    <!-- Modal for form error checking. -->
+<div class="modal fade" id="formErrorModal" tabindex="-1" role="dialog" aria-labelledby="formErrorModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formErrorModal">We have a problem !</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	 <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+
+
+
+
+  </body>
+</html>
